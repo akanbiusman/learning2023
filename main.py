@@ -1,5 +1,12 @@
 import re
 
-result = re.search(r"Py.*n", "Pygmalion").span()
-print(result)
+def re_items(name):
+    result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
+    if result is None:
+        return name
+    print(result)
+    return f"{result[2]}, {result[1]}"
 
+
+print(re_items("Lovelace, Ada"))
+print(re_items("Akanbi, Usman O."))
