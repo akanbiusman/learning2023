@@ -1,12 +1,13 @@
-import re
+import requests
 
-def re_items(name):
-    result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
-    if result is None:
-        return name
-    print(result)
-    return f"{result[2]}, {result[1]}"
+OWM_Endpoint = ""
+api_key = "3891326d501b507b6c68244cd08ccb78"
 
+weather_params = {
+    "lat": 51.507351,
+    "lon": -0.127758,
+    "appid": api_key,
+}
 
-print(re_items("Lovelace, Ada"))
-print(re_items("Akanbi, Usman O."))
+response = requests.get(OWM_Endpoint, params=weather_params)
+print(response.json())
