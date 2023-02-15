@@ -1,13 +1,30 @@
-import requests
+def mgSort(arr):
+    mgSort2(arr, 0, len(arr) - 1)
+    return arr
 
-OWM_Endpoint = ""
-api_key = "3891326d501b507b6c68244cd08ccb78"
 
-weather_params = {
-    "lat": 51.507351,
-    "lon": -0.127758,
-    "appid": api_key,
-}
+def mgSort2(arr, left, right):
+    if left < right:
+        mid = (left + right) // 2
+        mgSort2(arr, left, mid)
+        mgSort2(arr, mid + 1, right)
+        merge(arr, left, mid, right)
 
-response = requests.get(OWM_Endpoint, params=weather_params)
-print(response.json())
+
+def merge(arr, left, mid, right):
+    L = arr[left:mid + 1]
+    R = arr[mid + 1:right + 1]
+    L.append(999999999)
+    R.append(999999999)
+    i = j = 0
+
+    for k in range(left, right + 1):
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+
+
+print(mgSort([3, 5, 1, 2, 8, 9, 10]))
